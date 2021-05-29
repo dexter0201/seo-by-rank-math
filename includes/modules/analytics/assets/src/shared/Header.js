@@ -3,7 +3,7 @@
  */
 import { __ } from '@wordpress/i18n'
 import { compose } from '@wordpress/compose'
-import { applyFilters } from '@wordpress/hooks'
+import { applyFilters, doAction } from '@wordpress/hooks'
 import { withSelect, withDispatch } from '@wordpress/data'
 import { Button, SelectControl } from '@wordpress/components'
 
@@ -12,7 +12,7 @@ import { Button, SelectControl } from '@wordpress/components'
  */
 import Search from './Search'
 
-const Header = ( { heading, range, updateDaysRange, onChange, postID = 0, slug = false, adminURL } ) => {
+const Header = ( { heading, range, updateDaysRange, onChange, postID = 0, slug = false, adminURL, homeURL } ) => {
 	const dayRange = applyFilters( 'rank_math_analytics_day_range', [
 		{ label: '7 Days', value: '-7 days' },
 		{ label: '15 Days', value: '-15 days' },
@@ -35,7 +35,7 @@ const Header = ( { heading, range, updateDaysRange, onChange, postID = 0, slug =
 				{ slug && (
 					<a
 						className="rank-math-post-link"
-						href={ adminURL + slug }
+						href={ homeURL + slug }
 						target="_blank"
 						rel="noreferrer"
 					>
@@ -69,6 +69,9 @@ export default compose(
 	withDispatch( ( dispatch ) => {
 		return {
 			updateDaysRange( range ) {
+				// Should Invalidate entire store first.
+				dispatch( 'rank-math' ).invalidateResolutionForStore()
+				doAction( 'rank_math_analytics_clear_store' )
 				dispatch( 'rank-math' ).updateDaysRange( range )
 			},
 		}

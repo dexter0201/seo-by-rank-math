@@ -70,14 +70,14 @@ import jQuery from 'jquery'
 			inputs.queryNoticeTextHint = inputs.queryNotice.find( '.query-notice-hint' )
 
 			// Bind event handlers
-			inputs.dialog.keydown( wpLink.keydown )
-			inputs.dialog.keyup( wpLink.keyup )
-			inputs.submit.click( function( event ) {
+			inputs.dialog.on( 'keydown', ( e ) => wpLink.keydown( e ) )
+			inputs.dialog.on( 'keyup', ( e ) => wpLink.keyup( e ) )
+			inputs.submit.on( 'click', function( event ) {
 				event.preventDefault()
 				wpLink.update()
 			} )
 
-			inputs.close.add( inputs.backdrop ).add( '#wp-link-cancel button' ).click( function( event ) {
+			inputs.close.add( inputs.backdrop ).add( '#wp-link-cancel button' ).on( 'click', function( event ) {
 				event.preventDefault()
 				wpLink.close()
 			} )
@@ -679,7 +679,7 @@ import jQuery from 'jquery'
 		this.change( search )
 		this.refresh()
 
-		$( '#wp-link .query-results, #wp-link #link-selector' ).scroll( function() {
+		$( '#wp-link .query-results, #wp-link #link-selector' ).on( 'scroll', function() {
 			self.maybeLoad()
 		} )
 		element.on( 'click', 'li', function( event ) {

@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 5.7
 Requires at least: 5.5
 Requires PHP: 7.2
-Stable tag: 1.0.59.1
+Stable tag: 1.0.62
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -27,7 +27,7 @@ SEO might be the best and most **consistent source of traffic** for one's websit
 
 Its host of **intelligent features** brings top SEO capabilities in your hands that were previously out of reach. The **smart automation** features give you the **power of an entire SEO team** with just a few clicks. A **well thought out design, powerful features, and years of development** by the MyThemeShop squad make Rank Math a game-changing SEO plugin that will level the SEO playing field in your favor to help increase traffic.
 
-###  Rank Math beats the competition with hands tied behind its back. ###
+### Rank Math beats all of its competitors hands down. ###
 
 See the features which are exclusive to Rank Math SEO plugin and to understand why Rank Math is possibly the **Best SEO Plugin for WordPress**.
 
@@ -475,33 +475,20 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.59.1 [Mar 12, 2021] =
-* Fixed: Invalid link attributions after selecting `sponsored` & `nofollow` options
-* Fixed: Unable to change the "Unpublish When Expired" option's value from No to Yes without changing any other field in the JobPosting Schema
-* Fixed: Schema shortcode showing data in the wrong place
+= 1.0.62 [Apr 14, 2021] =
+* Added: Alt text as a caption property in the Primary Image, Logo, and Author Image Schema entities
+* Added: Description property in Author Schema entity
+* Added: `async` loading for the [Google Analytics tracking](https://rankmath.com/kb/install-google-analytics/) script
+* Added: Filter to add Analytics stats of different language posts into the main post, examples `abc.com/en/ or abc.com/es/`. Note: Support needs to be added by translation plugins
+* Improved: Primary image and Author image uses image URL as an ID in the Schema Markup
+* Improved: Add `Place` entity in the Schema markup only when address is added in the [Local SEO](https://rankmath.com/kb/local-seo/) Settings
+* Improved: Show [Database Tools](https://rankmath.com/kb/rank-math-status-and-tools/#tools) only if the related module is enabled
+* Fixed: [Analytics stats](https://rankmath.com/kb/analytics/) were not changing on some pages after changing the timeframe
+* Fixed: `Undefined index: logo` error if the logo was not set in the [Titles & Meta settings](https://rankmath.com/kb/titles-and-meta/)
+* Fixed: Google Search Console table creation issue with the MySQL 8.0
+* Fixed: [Breadcrumbs Schema](https://rankmath.com/kb/breadcrumbs/) was not showing on the Product category/tag archive pages
+* Fixed: Missing backgrounds in some of the tabs of [Elementor SEO](https://rankmath.com/blog/elementor-seo/)
+* Fixed: Custom field analysis was not working when the Divi theme was active
+* Fixed: Open Graph image "[Icon Overlay](https://rankmath.com/kb/meta-box-social-tab/#add-icon-overlay-to-thumbnails)" feature was not working
 
-= 1.0.59 [Mar 8, 2021] =
-* Improved: Compatibility with WordPress 5.7+ by disabling the [max-image-preview](https://rankmath.com/kb/advanced-tab/#max-image-preview) meta tag added by the core because Rank Math already has the [advanced options](https://rankmath.com/kb/advanced-tab/) related to it
-* Improved: Inverted Y-Axis in all the position graphs of the [Analytics module](https://rankmath.com/kb/analytics/) to make the graphs more accurate
-* Improved: Replaced `Cache-Control: One year` header from the [XML Sitemap](https://rankmath.com/kb/sitemaps-seo-benefits/) files to `Cache-Control: no-cache, no-store`
-* Improved: Added active modules list to the [system status page](https://rankmath.com/kb/rank-math-status-and-tools/)
-* Improved: Removed excess whitespace from the [Schema](https://rankmath.com/blog/schema-markup/) values when the variable was returning an empty value
-* Improved: Excluded Facebook's pixel image from the [Image ALT](https://rankmath.com/kb/image-seo/) test of [SEO Analysis](https://rankmath.com/kb/seo-analysis/)
-* Removed: Unnecessary debugging data from the system status tab to improve the performance
-* Fixed: [Install Analytics Code](https://rankmath.com/kb/install-google-analytics/) option was not working with the Firefox & the Brave browser
-* Fixed: [Video Schema](https://rankmath.com/kb/video-schema/) shortcode was not outputting any data
-* Fixed: Option to delete [Recipe Instructions](https://rankmath.com/kb/recipe-schema/) text was missing
-* Fixed: Wrong category hierarchy in [WooCommerce's Product Schema](https://rankmath.com/kb/woocommerce-product-schema/)
-* Fixed: "Unpublish When Expired" option was not working in the [JobPosting Schema](https://rankmath.com/kb/jobposting-schema/)
-* Fixed: Unable to choose a category for the "[Brand](https://rankmath.com/kb/woocommerce-brand-names/)" value for [WooCommerce Product Schema](https://rankmath.com/blog/woocommerce-seo/)
-* Fixed: A bug that was stripping out empty `data-attributes` from the content links
-* Fixed: A conflict with the FDP plugin and possibly others
-* Fixed: Conflict with the other plugins if `access_token` URL param was used in them
-* Fixed: Enabling [Remove Category Base](https://rankmath.com/kb/remove-wordpress-category-base/) option was generating 404 pages on some installations
-* Fixed: Browser console was showing a `400 Bad Request` when saving the general settings
-* Fixed: After connecting the [Rank Math's account](https://rankmath.com/kb/free-account-benefits/), the page was getting redirected to the wrong page on a Multisite
-* Fixed: Fallback [redirection](https://rankmath.com/kb/setting-up-redirections/) to home or URL was deactivating the WordPress's default redirection to login and dashboard pages
-* Fixed: [KML XSL](https://rankmath.com/kb/kml-sitemap/) file fails to load when special characters were used in the Business name
-* Fixed: A JS error on some admin pages
-
-Full changelog can be found here - **[Rank Math SEO changelog](https://rankmath.com/changelog/?utm_source=LP&utm_campaign=WP)**
+Full changelog can be found here - **[Rank Math SEO changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

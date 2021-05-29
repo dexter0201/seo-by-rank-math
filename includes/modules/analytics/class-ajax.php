@@ -36,12 +36,12 @@ class AJAX {
 		$this->ajax( 'verify_site_console', 'verify_site_console' );
 		$this->ajax( 'google_check_all_services', 'check_all_services' );
 
-		// Data.
+		// Google Data Management Services.
 		$this->ajax( 'analytics_delete_cache', 'delete_cache' );
 		$this->ajax( 'analytic_start_fetching', 'analytic_start_fetching' );
 		$this->ajax( 'analytic_cancel_fetching', 'analytic_cancel_fetching' );
 
-		// Save Services.
+		// Save Linked Google Account info Services.
 		$this->ajax( 'save_analytic_profile', 'save_analytic_profile' );
 		$this->ajax( 'save_analytic_options', 'save_analytic_options' );
 	}
@@ -57,7 +57,7 @@ class AJAX {
 		$country = Param::post( 'country', 'all' );
 		$days    = Param::get( 'days', 90, FILTER_VALIDATE_INT );
 
-		$prev  = get_option( 'rank_math_google_analytic_profile' );
+		$prev  = get_option( 'rank_math_google_analytic_profile', [] );
 		$value = [
 			'country' => $country,
 			'profile' => $profile,
@@ -69,6 +69,12 @@ class AJAX {
 		$all_accounts['sites'] = [ $profile => $profile ];
 		update_option( 'rank_math_analytics_all_services', $all_accounts );
 
+		// Purge Cache.
+		if ( ! empty( array_diff( $prev, $value ) ) ) {
+			DB::purge_cache();
+		}
+
+		// Start fetching console data.
 		Workflow\Workflow::do_workflow(
 			'console',
 			$days,
@@ -101,6 +107,7 @@ class AJAX {
 		$prev = get_option( 'rank_math_google_analytic_options' );
 		$days = Param::get( 'days', 90, FILTER_VALIDATE_INT );
 
+		// Preserve adsense info.
 		if ( isset( $prev['adsense_id'] ) ) {
 			$value['adsense_id'] = $prev['adsense_id'];
 		}
@@ -120,6 +127,7 @@ class AJAX {
 		}
 		update_option( 'rank_math_analytics_all_services', $all_accounts );
 
+		// Start fetching analytics data.
 		Workflow\Workflow::do_workflow(
 			'analytics',
 			$days,
@@ -131,7 +139,7 @@ class AJAX {
 	}
 
 	/**
-	 * Disconnect google tokens.
+	 * Disconnect google.
 	 */
 	public function disconnect_google() {
 		check_ajax_referer( 'rank-math-ajax-nonce', 'security' );
@@ -154,7 +162,7 @@ class AJAX {
 	}
 
 	/**
-	 * Get cache progressively.
+	 * Start data fetching for console, analytics, adsense.
 	 */
 	public function analytic_start_fetching() {
 		check_ajax_referer( 'rank-math-ajax-nonce', 'security' );
@@ -174,6 +182,7 @@ class AJAX {
 			delete_option( 'rank_math_analytics_installed' );
 		}
 
+		// Start fetching data.
 		foreach ( [ 'console', 'analytics', 'adsense' ] as $action ) {
 			Workflow\Workflow::do_workflow(
 				$action,
@@ -198,7 +207,10 @@ class AJAX {
 			$this->error( esc_html__( 'Not a valid settings founds to delete cache.', 'rank-math' ) );
 		}
 
+		// Delete fetched console data within specified date range.
 		DB::delete_by_days( $days );
+
+		// Cancel data fetch action.
 		Workflow\Workflow::kill_workflows();
 		delete_transient( 'rank_math_analytics_data_info' );
 		$db_info            = DB::info();
@@ -210,7 +222,7 @@ class AJAX {
 	}
 
 	/**
-	 * Query analytics.
+	 * Search objects info by title or page and return.
 	 */
 	public function query_analytics() {
 		check_ajax_referer( 'rank-math-ajax-nonce', 'security' );

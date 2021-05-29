@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'dd0fb92df546d39e69a9b485bae877afb15f075c',
+    'reference' => '2ff87834fdd935bad051c5e8b16f85dd9ec294ef',
     'name' => 'rankmath/seo-by-rank-math',
   ),
   'versions' => 
@@ -31,21 +31,21 @@
     ),
     'donatj/phpuseragentparser' => 
     array (
-      'pretty_version' => 'v1.3.0',
-      'version' => '1.3.0.0',
+      'pretty_version' => 'v1.4.0',
+      'version' => '1.4.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'f9a521726b2ce4c5173281ceaab5a02c05b691ef',
+      'reference' => '246c1cf0a44f07168c702203bf30d5f48f17bab0',
     ),
     'mythemeshop/wordpress-helpers' => 
     array (
-      'pretty_version' => 'v1.1.10',
-      'version' => '1.1.10.0',
+      'pretty_version' => 'v1.1.11',
+      'version' => '1.1.11.0',
       'aliases' => 
       array (
       ),
-      'reference' => '67121692c9fb45f57d05f46dab551e99d3b3b31a',
+      'reference' => 'cd5f3af7e5bc0810a2544498a460af09af2407b6',
     ),
     'rankmath/seo-by-rank-math' => 
     array (
@@ -54,7 +54,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'dd0fb92df546d39e69a9b485bae877afb15f075c',
+      'reference' => '2ff87834fdd935bad051c5e8b16f85dd9ec294ef',
     ),
     'woocommerce/action-scheduler' => 
     array (

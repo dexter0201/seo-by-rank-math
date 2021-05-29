@@ -33,7 +33,7 @@ class DB {
 	}
 
 	/**
-	 * Get all schemas.
+	 * Get all schemas by Object ID.
 	 *
 	 * @param int    $object_id  Object ID.
 	 * @param string $table      Meta table name.
@@ -41,6 +41,11 @@ class DB {
 	 * @return array
 	 */
 	public static function get_schemas( $object_id, $table = 'postmeta' ) {
+		// Add exception handler.
+		if ( is_null( $object_id ) ) {
+			return [];
+		}
+
 		$key  = 'termmeta' === $table ? 'term_id' : 'post_id';
 		$data = self::table( $table )
 			->select( 'meta_id' )
@@ -59,19 +64,28 @@ class DB {
 	}
 
 	/**
-	 * Get all schemas.
+	 * Get Schema types by Object ID.
 	 *
-	 * @param int $post_id Post id.
+	 * @param int  $object_id Object ID.
+	 * @param bool $sanitize  Sanitize schema types.
 	 *
 	 * @return array
 	 */
-	public static function get_schema_types( $post_id ) {
-		$schemas = self::get_schemas( $post_id );
+	public static function get_schema_types( $object_id, $sanitize = false ) {
+		$schemas = self::get_schemas( $object_id );
 		if ( empty( $schemas ) ) {
 			return false;
 		}
 
 		$types = wp_list_pluck( $schemas, '@type' );
+		if ( $sanitize ) {
+			$types = array_map(
+				function ( $type ) {
+					return Helper::sanitize_schema_title( $type );
+				},
+				$types
+			);
+		}
 		return implode( ', ', $types );
 	}
 
@@ -125,9 +139,9 @@ class DB {
 	}
 
 	/**
-	 * Delete Schema for template.
+	 * Delete Schema data using Post ID.
 	 *
-	 * @param int $post_id Post id.
+	 * @param int $post_id Post ID.
 	 *
 	 * @return string
 	 */
